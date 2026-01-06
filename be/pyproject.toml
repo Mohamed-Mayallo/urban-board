@@ -1,0 +1,28 @@
+[tool.mypy]
+python_version = "3.12"
+strict = true
+files = ["src"]
+exclude = [
+  "migrations",
+  "\\.venv",
+  "__pycache__",
+  ".*\\.pyc",
+  ".mypy_cache",
+  "manage.py",
+  "db.sqlite3",
+]
+plugins = [
+  "mypy_django_plugin.main",
+  "mypy_drf_plugin.main",
+]
+warn_unused_ignores = true
+warn_return_any = true
+show_error_codes = true
+ignore_missing_imports = true
+module = [
+  "pydantic.*",
+  "rest_framework.*",
+]
+
+[tool.django-stubs]
+django_settings_module = "src.settings"
