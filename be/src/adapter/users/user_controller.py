@@ -17,7 +17,8 @@ class UsersView(APIView):
             return Response(status=status.HTTP_401_UNAUTHORIZED)
 
         usecase = injector.get(MeUseCase)
-        currentUser = usecase.execute(user.to_domain_user())
+        currentUser = usecase.execute(user.to_domain())
+
         return Response(
             MeResponseDTO.model_validate(currentUser).model_dump(),
             status=status.HTTP_200_OK,

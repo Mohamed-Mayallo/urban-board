@@ -6,6 +6,8 @@ from django.db import models
 
 from domain.users.user import User
 from domain.users.user import Roles
+from ..cities.city import City
+from ..cities.city import CityModel
 
 
 class UserManager(BaseUserManager["UserModel"]):
@@ -39,11 +41,9 @@ class UserModel(AbstractUser):
         choices=[(role.value, role.value) for role in Roles],
         default=Roles.VIEWER.value,
     )
-    city_id: int | None = models.IntegerField(  # type: ignore[assignment]
-        null=True,
-        blank=True,
-        help_text="Only for city admins",
-    )
+    city: City = models.ForeignKey(
+        # type: ignore[assignment]
+        CityModel, blank=True, null=True, on_delete=models.CASCADE)
 
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = ["name", 'role']
@@ -59,11 +59,12 @@ class UserModel(AbstractUser):
         verbose_name_plural = "Users"
         ordering = ["id"]
 
-    def to_domain_user(self) -> User:
+    def to_domain(self) -> User:
         return User(
             id=self.id,
             name=self.name,
             email=self.email,
             role=self.role,
-            city_id=self.city_id,
+            city=self.city,
+            city_id=self.city.id,
         )

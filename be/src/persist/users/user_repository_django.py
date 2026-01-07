@@ -9,4 +9,4 @@ class DjangoUserRepository:
         obj = UserModel.objects.get(id=user_id)
         if not obj:
             return None
-        return User(**obj.to_domain_user())
+        return obj.to_domain()
