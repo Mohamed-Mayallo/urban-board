@@ -4,7 +4,7 @@ repos:
     rev: 23.12.1
     hooks:
       - id: black
-        language_version: python3.12
+        language_version: python # Use the current .venv version
 
   - repo: https://github.com/PyCQA/isort
     rev: 5.13.2
@@ -26,4 +26,7 @@ repos:
         additional_dependencies:
           - django-stubs
           - djangorestframework-stubs
+          - injector
+          - djangorestframework-simplejwt
+          - pydantic
         args: ["--install-types", "--non-interactive"]

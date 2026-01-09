@@ -26,3 +26,10 @@ module = [
 
 [tool.django-stubs]
 django_settings_module = "src.settings"
+
+[tool.black]
+line-length = 120
+
+[tool.isort]
+profile = "black"
+line_length = 120
