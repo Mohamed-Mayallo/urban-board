@@ -19,6 +19,7 @@ from django.urls import path
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 from adapter.population_records.population_records_controller import PopulationRecordsGrowthOverTimeView
+from adapter.traffic_incidents.traffic_incidents_controller import IncidentsOverTimeView
 from adapter.users.user_controller import UsersView
 
 urlpatterns = [
@@ -29,5 +30,9 @@ urlpatterns = [
     path(
         "api/population-records/growth-over-time/",
         PopulationRecordsGrowthOverTimeView.as_view(),
+    ),
+    path(
+        "api/traffic-incidents/growth-over-time/",
+        IncidentsOverTimeView.as_view(),
     ),
 ]
